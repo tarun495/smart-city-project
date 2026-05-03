@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Article | Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/admin">⚙️ Admin</a></li>
+        <li><a href="/admin/news">← News</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+<div class="section">
+    <h2 class="section-title">✏️ Edit <span>Article</span></h2>
+    <div class="card" style="max-width:700px; margin:0 auto;">
+        <form th:action="@{/admin/news/edit/{id}
+                         (id=${article.id})}"
+              th:object="${article}" method="post">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text"
+                       th:field="*{title}" required/>
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea th:field="*{content}"
+                          rows="6" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select th:field="*{category}">
+                    <option value="LOCAL">Local News</option>
+                    <option value="GOVERNMENT">Government</option>
+                    <option value="BUSINESS">Business</option>
+                    <option value="TOURISM">Tourism</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Author</label>
+                <input type="text" th:field="*{author}"/>
+            </div>
+            <div class="form-group">
+                <label style="display:flex;
+                               align-items:center; gap:8px;">
+                    <input type="checkbox"
+                           th:field="*{premium}"/>
+                    Premium Article
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Update Article
+            </button>
+            &nbsp;
+            <a href="/admin/news"
+               class="btn btn-danger">Cancel</a>
+        </form>
+    </div>
+</div>
+<footer><p>© 2026 SmartCity Admin</p></footer>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>City Map | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+
+    <style>
+        #map {
+            height: 580px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .map-wrapper {
+            padding: 20px 30px 40px 30px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/paid/subscribe?service=NEWS_PREMIUM">Premium ⭐</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Register</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="hero" style="padding:30px 20px;">
+    <h1>🗺️ City <span style="color:#ffd700;">Map</span></h1>
+    <p>Explore key markets, businesses and places of interest</p>
+</div>
+
+<div class="map-wrapper">
+    <p style="text-align:center; color:#666; margin-bottom:15px;">
+        Click any marker to see business details
+    </p>
+    <div id="map"></div>
+</div>
+
+<div class="section" style="padding-top:10px;">
+    <h2 class="section-title">📍 Places on <span>Map</span></h2>
+    <div class="grid-3">
+        <div class="card" th:each="biz : ${businesses}">
+            <span style="background:#1a1a2e; color:white;
+                         padding:2px 10px; border-radius:10px;
+                         font-size:11px;"
+                  th:text="${biz.category}">Category</span>
+            <h3 style="margin:10px 0 5px;"
+                th:text="${biz.name}">Name</h3>
+            <p style="font-size:13px; color:#666;">
+                📍 <span th:text="${biz.address}">Address</span>
+            </p>
+        </div>
+        <div th:if="${#lists.isEmpty(businesses)}"
+             class="card"
+             style="grid-column:1/-1; text-align:center;">
+            <p>No locations yet. Add via Admin panel.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal</p>
+</footer>
+
+<!-- Leaflet JS from cdnjs (more reliable) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+<script>
+    // Wait for full page load
+    window.addEventListener('load', function() {
+
+        // Create map
+        var map = L.map('map').setView([19.0760, 72.8777], 13);
+
+        // Try tile layer 1: OpenStreetMap
+        var osmLayer = L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }
+        );
+
+        // Try tile layer 2: CartoDB (fallback)
+        var cartoLayer = L.tileLayer(
+            'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+            {
+                attribution: '© CartoDB',
+                maxZoom: 19
+            }
+        );
+
+        // Add OSM first, fallback to CartoDB if fails
+        osmLayer.addTo(map);
+        osmLayer.on('tileerror', function() {
+            console.log('OSM failed, trying CartoDB...');
+            map.removeLayer(osmLayer);
+            cartoLayer.addTo(map);
+        });
+
+        // Force map to recalculate size
+        setTimeout(function() {
+            map.invalidateSize(true);
+        }, 500);
+
+        // Add a test marker at Mumbai center
+        // so you can see if map works even without businesses
+        L.marker([19.0760, 72.8777])
+            .addTo(map)
+            .bindPopup('<b>Mumbai City Center</b>')
+            .openPopup();
+
+        // Load business markers from server
+        fetch('/map/api/locations')
+            .then(function(r) { return r.json(); })
+            .then(function(locations) {
+                console.log('Loaded locations:', locations.length);
+                locations.forEach(function(loc) {
+                    if (loc.latitude && loc.longitude
+                            && loc.latitude !== 0) {
+                        L.marker([loc.latitude, loc.longitude])
+                            .addTo(map)
+                            .bindPopup(
+                                '<b>' + loc.name + '</b><br>' +
+                                loc.category + '<br>' +
+                                loc.address
+                            );
+                    }
+                });
+            })
+            .catch(function(e) {
+                console.log('API error:', e);
+            });
+    });
+</script>
+
+</body>
+</html>

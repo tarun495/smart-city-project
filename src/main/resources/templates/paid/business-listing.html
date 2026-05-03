@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Featured Businesses | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="hero" style="padding:30px 20px;">
+    <h1>🏢 Featured <span style="color:#ffd700;">Businesses</span></h1>
+    <p>Top-rated and premium listed businesses in the city</p>
+</div>
+
+<div class="section">
+    <div style="background:#ffd700; color:#1a1a2e;
+                padding:8px 20px; border-radius:25px;
+                display:inline-block; font-weight:600;
+                font-size:13px; margin-bottom:25px;">
+        ⭐ PREMIUM SUBSCRIBER
+    </div>
+
+    <div class="grid-3">
+        <div class="card"
+             th:each="biz : ${businesses}"
+             style="border-top:3px solid #ffd700;">
+            <div style="display:flex;
+                        justify-content:space-between;
+                        align-items:center;
+                        margin-bottom:10px;">
+                <span style="background:#1a1a2e;
+                              color:white;
+                              padding:3px 10px;
+                              border-radius:10px;
+                              font-size:11px;"
+                      th:text="${biz.category}">
+                    Category
+                </span>
+                <span style="color:#ffd700;
+                              font-weight:700;
+                              font-size:16px;">★</span>
+            </div>
+            <h3 style="margin-bottom:8px;"
+                th:text="${biz.name}">Name</h3>
+            <p style="color:#666; font-size:13px;"
+               th:text="${biz.description}">
+                Description
+            </p>
+            <hr style="margin:12px 0; border:none;
+                       border-top:1px solid #f0f0f0;"/>
+            <p style="font-size:13px; color:#666;">
+                📍 <span th:text="${biz.address}">
+                    Address
+                </span>
+            </p>
+            <p style="font-size:13px; color:#666;">
+                📞 <span th:text="${biz.phone}">
+                    Phone
+                </span>
+            </p>
+            <p style="font-size:13px;"
+               th:if="${biz.website != null
+                        and biz.website != ''}">
+                🌐 <a th:href="${biz.website}"
+                      style="color:#e94560;"
+                      th:text="${biz.website}">
+                    Website
+                </a>
+            </p>
+        </div>
+
+        <div th:if="${#lists.isEmpty(businesses)}"
+             class="card"
+             style="grid-column:1/-1;
+                    text-align:center; padding:40px;">
+            <div style="font-size:48px;">🏢</div>
+            <h3 style="margin:15px 0;">
+                No featured businesses yet
+            </h3>
+            <p style="color:#666;">
+                Businesses can get featured by
+                subscribing to the Business Listing plan.
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal</p>
+</footer>
+</body>
+</html>

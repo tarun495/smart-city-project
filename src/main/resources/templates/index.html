@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SmartCity - Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/paid/subscribe?service=NEWS_PREMIUM">Premium ⭐</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Register</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+        <li><a href="/admin" style="color:#e94560;">Admin</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <h1>Welcome to <span style="color:#ffd700;">SmartCity</span></h1>
+    <p>Your one-stop portal for city news, maps, businesses and more</p>
+    <div class="btn-group">
+        <a href="/map" class="btn btn-primary">🗺️ Explore Map</a>
+        <a href="/news" class="btn btn-outline">📰 Latest News</a>
+        <a href="/auth/register" class="btn btn-outline">Join Free</a>
+    </div>
+</div>
+
+<div class="section">
+    <h2 class="section-title">Explore <span>SmartCity</span></h2>
+    <div class="grid-3">
+        <div class="card">
+            <h3>🗺️ City Map</h3>
+            <p>Interactive map with key markets, places and transport hubs.</p>
+            <br/>
+            <a href="/map" class="btn btn-primary btn-sm">View Map</a>
+        </div>
+        <div class="card">
+            <h3>🏛️ City History</h3>
+            <p>Explore the rich social and political history of our city.</p>
+            <br/>
+            <a href="/history" class="btn btn-primary btn-sm">Read More</a>
+        </div>
+        <div class="card">
+            <h3>🏢 Business Directory</h3>
+            <p>Find hotels, restaurants, markets and local businesses.</p>
+            <br/>
+            <a href="/business" class="btn btn-primary btn-sm">Browse</a>
+        </div>
+        <div class="card">
+            <h3>📰 News and Events</h3>
+            <p>Stay updated with local news and government notices.</p>
+            <br/>
+            <a href="/news" class="btn btn-primary btn-sm">Read News</a>
+        </div>
+        <div class="card">
+            <h3>💬 Community Forum</h3>
+            <p>Discuss, ask questions and connect with locals and experts.</p>
+            <br/>
+            <a href="/forum" class="btn btn-primary btn-sm">Join Forum</a>
+        </div>
+        <div class="card">
+            <h3>⭐ Premium Services</h3>
+            <p>Market rates, tourist guide, premium news and more.</p>
+            <br/>
+            <a href="/paid/subscribe?service=NEWS_PREMIUM"
+               class="btn btn-primary btn-sm">Go Premium</a>
+        </div>
+    </div>
+</div>
+
+<div class="section" style="background:white; padding:40px 30px;">
+    <h2 class="section-title">Latest <span>News</span></h2>
+    <div class="grid-3">
+        <div class="card" th:each="article : ${latestNews}">
+            <small style="color:#e94560; font-weight:600;"
+                   th:text="${article.category}">Category</small>
+            <h3 style="margin:10px 0;"
+                th:text="${article.title}">Title</h3>
+            <p th:text="${#strings.abbreviate(article.content,100)}">
+                Content...</p>
+            <br/>
+            <a th:href="@{/news/{id}(id=${article.id})}"
+               class="btn btn-primary btn-sm">Read More</a>
+        </div>
+        <div th:if="${#lists.isEmpty(latestNews)}" class="card">
+            <h3>No news yet</h3>
+            <p>Check back soon for the latest city updates.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal |
+        <a href="/news">News</a> |
+        <a href="/map">Map</a> |
+        <a href="/forum">Forum</a>
+    </p>
+</footer>
+</body>
+</html>

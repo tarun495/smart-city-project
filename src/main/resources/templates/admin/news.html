@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage News | SmartCity Admin</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:Arial, sans-serif;
+               background:#f4f6f9; color:#333; }
+        .navbar { background:#1a1a2e; padding:15px 30px;
+                  display:flex; justify-content:space-between;
+                  align-items:center; }
+        .navbar .brand { color:#e94560; font-size:22px;
+                         font-weight:700;
+                         text-decoration:none; }
+        .navbar ul { list-style:none; display:flex; gap:20px; }
+        .navbar ul li a { color:#ccc; text-decoration:none;
+                          font-size:14px; }
+        .navbar ul li a:hover { color:#e94560; }
+        .section { padding:30px; }
+        .section-title { font-size:26px; font-weight:700;
+                         color:#1a1a2e; margin-bottom:20px; }
+        .section-title span { color:#e94560; }
+        .card { background:white; border-radius:12px;
+                padding:25px; margin-bottom:25px;
+                box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+        .card h3 { margin-bottom:15px; color:#1a1a2e; }
+        .form-group { margin-bottom:15px; }
+        .form-group label { display:block; margin-bottom:5px;
+                            font-size:13px; font-weight:600;
+                            color:#555; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea { width:100%; padding:10px 12px;
+                               border:2px solid #e0e0e0;
+                               border-radius:6px;
+                               font-size:13px; }
+        .grid-2 { display:grid;
+                  grid-template-columns:1fr 1fr; gap:15px; }
+        .table-container { background:white;
+                           border-radius:12px; padding:25px;
+                           box-shadow:0 4px 15px
+                           rgba(0,0,0,0.08);
+                           overflow-x:auto; }
+        table { width:100%; border-collapse:collapse; }
+        th { background:#1a1a2e; color:white;
+             padding:12px 15px; text-align:left;
+             font-size:13px; }
+        td { padding:11px 15px;
+             border-bottom:1px solid #f0f0f0;
+             font-size:13px; }
+        tr:hover { background:#f9f9f9; }
+        .btn { padding:6px 14px; border-radius:5px;
+               font-size:12px; font-weight:600;
+               text-decoration:none; cursor:pointer;
+               border:none; display:inline-block; }
+        .btn-primary { background:#e94560; color:white; }
+        .btn-warning { background:#ffc107; color:#333; }
+        .btn-danger { background:#dc3545; color:white; }
+        .btn-back { background:#1a1a2e; color:white;
+                    padding:10px 20px; font-size:14px;
+                    border-radius:8px;
+                    text-decoration:none;
+                    display:inline-block; margin-top:20px; }
+        footer { background:#1a1a2e; color:#aaa;
+                 text-align:center; padding:20px;
+                 margin-top:40px; font-size:13px; }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/admin" style="color:#e94560;">⚙️ Admin</a></li>
+        <li><a href="/admin/users">Users</a></li>
+        <li><a href="/admin/business">Business</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="section">
+    <h2 class="section-title">📰 Manage <span>News</span></h2>
+
+    <div class="card">
+        <h3>➕ Add New Article</h3>
+        <form th:action="@{/admin/news/add}"
+              th:object="${newArticle}" method="post"
+              xmlns:th="http://www.thymeleaf.org">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" th:field="*{title}"
+                       placeholder="Article title" required/>
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea th:field="*{content}" rows="4"
+                    placeholder="Article content..."
+                    required></textarea>
+            </div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select th:field="*{category}">
+                        <option value="LOCAL">Local News</option>
+                        <option value="GOVERNMENT">
+                            Government</option>
+                        <option value="BUSINESS">Business</option>
+                        <option value="TOURISM">Tourism</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Author</label>
+                    <input type="text" th:field="*{author}"
+                           placeholder="Author name"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox"
+                           th:field="*{premium}"/>
+                    &nbsp;Premium Article
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary"
+                    style="padding:10px 24px; font-size:14px;">
+                Add Article
+            </button>
+        </form>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Premium</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="article : ${articles}"
+                    xmlns:th="http://www.thymeleaf.org">
+                    <td th:text="${article.id}">1</td>
+                    <td th:text="${#strings.abbreviate(article.title,40)}">Title</td>
+                    <td th:text="${article.category}">Cat</td>
+                    <td th:text="${article.author}">Author</td>
+                    <td>
+                        <span th:if="${article.premium}"
+                              style="color:#28a745;
+                                     font-weight:600;">
+                            ✅ Yes
+                        </span>
+                        <span th:unless="${article.premium}"
+                              style="color:#999;">No</span>
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/news/edit/{id}(id=${article.id})}" class="btn btn-warning">Edit</a>
+                        &nbsp;
+                        <a th:href="@{/admin/news/delete/{id}(id=${article.id})}" class="btn btn-danger" onclick="return confirm('Delete?')">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="/admin" class="btn-back">← Back to Dashboard</a>
+</div>
+<footer><p>© 2026 SmartCity Admin Panel</p></footer>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>City Tourist Guide | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="hero" style="padding:30px 20px;">
+    <h1>🗺️ City <span style="color:#ffd700;">Tourist Guide</span></h1>
+    <p>Curated itineraries, hidden gems and local tips</p>
+</div>
+
+<div class="section">
+    <div style="background:#ffd700; color:#1a1a2e;
+                padding:8px 20px; border-radius:25px;
+                display:inline-block; font-weight:600;
+                font-size:13px; margin-bottom:25px;">
+        ⭐ PREMIUM SUBSCRIBER
+    </div>
+
+    <!-- Day Itineraries -->
+    <h2 class="section-title">
+        Suggested <span>Itineraries</span>
+    </h2>
+    <div class="grid-3">
+
+        <div class="card"
+             style="border-top:3px solid #e94560;">
+            <h3>🌅 Day 1 — Heritage Trail</h3>
+            <br/>
+            <p style="font-size:13px; line-height:1.8;">
+                <strong>9:00 AM</strong> —
+                Visit the Old Fort &amp; Museum<br/>
+                <strong>11:30 AM</strong> —
+                Heritage Walk through the old bazaar<br/>
+                <strong>1:00 PM</strong> —
+                Lunch at local thali restaurant<br/>
+                <strong>3:00 PM</strong> —
+                Visit the historic temple complex<br/>
+                <strong>5:00 PM</strong> —
+                Sunset at the riverside promenade<br/>
+                <strong>7:30 PM</strong> —
+                Dinner at rooftop restaurant
+            </p>
+        </div>
+
+        <div class="card"
+             style="border-top:3px solid #1a1a2e;">
+            <h3>🏪 Day 2 — Markets &amp; Shopping</h3>
+            <br/>
+            <p style="font-size:13px; line-height:1.8;">
+                <strong>8:00 AM</strong> —
+                Morning market &amp; breakfast<br/>
+                <strong>10:00 AM</strong> —
+                Central wholesale market tour<br/>
+                <strong>12:30 PM</strong> —
+                Street food lunch<br/>
+                <strong>2:00 PM</strong> —
+                Handicraft &amp; textile market<br/>
+                <strong>4:30 PM</strong> —
+                Spice market visit<br/>
+                <strong>7:00 PM</strong> —
+                Cultural show &amp; dinner
+            </p>
+        </div>
+
+        <div class="card"
+             style="border-top:3px solid #28a745;">
+            <h3>🌿 Day 3 — Nature &amp; Leisure</h3>
+            <br/>
+            <p style="font-size:13px; line-height:1.8;">
+                <strong>7:00 AM</strong> —
+                Morning walk at botanical garden<br/>
+                <strong>9:30 AM</strong> —
+                Visit the city zoo<br/>
+                <strong>12:00 PM</strong> —
+                Picnic lunch at central park<br/>
+                <strong>2:30 PM</strong> —
+                Boating at the city lake<br/>
+                <strong>5:00 PM</strong> —
+                Visit the viewpoint hilltop<br/>
+                <strong>7:30 PM</strong> —
+                Farewell dinner
+            </p>
+        </div>
+    </div>
+
+    <!-- Local Tips -->
+    <h2 class="section-title" style="margin-top:40px;">
+        Local <span>Tips</span>
+    </h2>
+    <div class="grid-3">
+        <div class="card">
+            <h3>🚌 Transport</h3>
+            <p style="font-size:13px; color:#666;
+                       margin-top:8px; line-height:1.7;">
+                Use city buses for short distances.
+                Auto-rickshaws are metered — always
+                insist on meter. Avoid peak hours
+                (8-10 AM, 5-7 PM).
+            </p>
+        </div>
+        <div class="card">
+            <h3>🍽️ Food</h3>
+            <p style="font-size:13px; color:#666;
+                       margin-top:8px; line-height:1.7;">
+                Try local thali for lunch — best
+                value. Street food is excellent but
+                stick to busy stalls. Avoid raw
+                salads from unknown vendors.
+            </p>
+        </div>
+        <div class="card">
+            <h3>💰 Money</h3>
+            <p style="font-size:13px; color:#666;
+                       margin-top:8px; line-height:1.7;">
+                ATMs available in all main markets.
+                Bargaining is expected in local
+                bazaars. Most hotels accept cards
+                but keep cash handy.
+            </p>
+        </div>
+        <div class="card">
+            <h3>📱 Connectivity</h3>
+            <p style="font-size:13px; color:#666;
+                       margin-top:8px; line-height:1.7;">
+                Local SIM cards available at the
+                airport and central market. Most
+                cafes and hotels offer free WiFi.
+                Download offline maps before you go.
+            </p>
+        </div>
+        <div class="card">
+            <h3>🏥 Emergency</h3>
+            <p style="font-size:13px; color:#666;
+                       margin-top:8px; line-height:1.7;">
+                Police: 100 | Ambulance: 108<br/>
+                City Hospital: 022-12345678<br/>
+                Tourist Helpline: 1800-XXX-XXXX<br/>
+                Available 24/7.
+            </p>
+        </div>
+        <div class="card">
+            <h3>🕌 Culture</h3>
+            <p style="font-size:13px; color:#666;
+                       margin-top:8px; line-height:1.7;">
+                Dress modestly at religious sites.
+                Remove shoes before entering temples.
+                Ask permission before photographing
+                locals. Respect local customs.
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal</p>
+</footer>
+</body>
+</html>

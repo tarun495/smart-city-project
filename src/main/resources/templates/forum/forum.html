@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Forum | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Register</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="section">
+    <h2 class="section-title">💬 Community <span>Forum</span></h2>
+
+    <!-- Login prompt -->
+    <div class="alert alert-info"
+         style="max-width:700px; margin:0 auto 20px auto;
+                text-align:center;">
+        <a href="/auth/login"
+           style="color:#0c5460; font-weight:600;">Login</a>
+        to post in discussions.
+    </div>
+
+    <!-- New Post Form -->
+    <div class="card"
+         style="max-width:700px; margin:0 auto 30px auto;">
+        <h3>Start a Discussion</h3>
+        <form action="/forum/post" method="post"
+              style="margin-top:15px;">
+            <div class="form-group">
+                <input type="text" name="title"
+                       placeholder="Post title" required/>
+            </div>
+            <div class="form-group">
+                <textarea name="content" rows="3"
+                          placeholder="Share your thoughts..."
+                          required></textarea>
+            </div>
+            <div class="form-group">
+                <select name="category">
+                    <option value="GENERAL">General</option>
+                    <option value="TOURISM">Tourism</option>
+                    <option value="BUSINESS">Business</option>
+                    <option value="CIVIC">Civic Issues</option>
+                </select>
+            </div>
+            <button type="submit"
+                    class="btn btn-primary">Post</button>
+        </form>
+    </div>
+
+    <!-- Forum Posts -->
+    <div style="max-width:700px; margin:0 auto;">
+        <div class="forum-post"
+             th:each="post : ${posts}">
+            <span style="background:#e94560; color:white;
+                         padding:2px 10px; border-radius:10px;
+                         font-size:11px;"
+                  th:text="${post.category}">Category</span>
+            <h3 style="margin:10px 0;"
+                th:text="${post.title}">Title</h3>
+            <p th:text="${post.content}">Content</p>
+            <div class="meta">
+                Posted by
+                <strong th:text="${post.author?.fullName}">
+                    User
+                </strong>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(posts)}"
+             style="text-align:center; padding:40px;">
+            <p>No posts yet. Be the first to start a discussion!</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal |
+        <a href="/news">News</a> |
+        <a href="/map">Map</a> |
+        <a href="/forum">Forum</a>
+    </p>
+</footer>
+</body>
+</html>

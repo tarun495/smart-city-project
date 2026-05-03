@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/admin" style="color:#e94560;">⚙️ Admin</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="section">
+    <h2 class="section-title">⚙️ Admin <span>Dashboard</span></h2>
+
+    <!-- Stats Row -->
+    <div class="grid-3" style="margin-bottom:30px;">
+        <div class="card" style="text-align:center;
+                                  border-top:4px solid #e94560;">
+            <div style="font-size:48px; font-weight:700;
+                        color:#e94560;"
+                 th:text="${totalUsers}">0</div>
+            <p>Total Users</p>
+        </div>
+        <div class="card" style="text-align:center;
+                                  border-top:4px solid #1a1a2e;">
+            <div style="font-size:48px; font-weight:700;
+                        color:#1a1a2e;"
+                 th:text="${totalNews}">0</div>
+            <p>News Articles</p>
+        </div>
+        <div class="card" style="text-align:center;
+                                  border-top:4px solid #28a745;">
+            <div style="font-size:48px; font-weight:700;
+                        color:#28a745;"
+                 th:text="${totalBusinesses}">0</div>
+            <p>Businesses</p>
+        </div>
+    </div>
+
+    <!-- Admin Action Cards -->
+    <div class="grid-3">
+        <div class="card">
+            <h3>👥 Manage Users</h3>
+            <p>View, manage and remove registered users.</p>
+            <br/>
+            <a href="/admin/users"
+               class="btn btn-primary btn-sm">
+                Manage Users
+            </a>
+        </div>
+        <div class="card">
+            <h3>📰 Manage News</h3>
+            <p>Add, edit or delete news articles.</p>
+            <br/>
+            <a href="/admin/news"
+               class="btn btn-primary btn-sm">
+                Manage News
+            </a>
+        </div>
+        <div class="card">
+            <h3>🏢 Manage Business</h3>
+            <p>Add businesses to directory and map.</p>
+            <br/>
+            <a href="/admin/business"
+               class="btn btn-primary btn-sm">
+                Manage Business
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal |
+        <a href="/admin/users">Users</a> |
+        <a href="/admin/news">News</a> |
+        <a href="/admin/business">Business</a>
+    </p>
+</footer>
+</body>
+</html>

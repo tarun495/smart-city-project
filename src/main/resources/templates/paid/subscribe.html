@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head('Premium Services')}"></head>
+<body>
+<nav th:replace="~{layout/base :: navbar}"></nav>
+
+<div class="section">
+    <h2 class="section-title">⭐ Premium <span>Services</span></h2>
+    <p style="text-align:center; color:#666; margin-bottom:40px;">
+        Subscribe to unlock exclusive city services
+    </p>
+
+    <div class="grid-3" style="max-width:1100px; margin:0 auto;">
+
+        <!-- NEWS PREMIUM -->
+        <div class="service-card">
+            <div style="font-size:48px;">📰</div>
+            <h3>Premium City News</h3>
+            <div class="price">₹99 <span>/ month</span></div>
+            <p style="color:#666; margin-bottom:20px;">
+                Exclusive news, in-depth reports & government notices
+                before anyone else.
+            </p>
+            <form th:action="@{/paid/subscribe}" method="post">
+                <input type="hidden" name="serviceType"
+                       value="NEWS_PREMIUM"/>
+                <button type="submit"
+                        class="btn btn-primary">Subscribe Now</button>
+            </form>
+        </div>
+
+        <!-- MARKET RATES -->
+        <div class="service-card">
+            <div style="font-size:48px;">📊</div>
+            <h3>Live Market Rates</h3>
+            <div class="price">₹149 <span>/ month</span></div>
+            <p style="color:#666; margin-bottom:20px;">
+                Daily commodity prices — vegetables, fruits,
+                grains, metals updated every morning.
+            </p>
+            <form th:action="@{/paid/subscribe}" method="post">
+                <input type="hidden" name="serviceType"
+                       value="MARKET_RATES"/>
+                <button type="submit"
+                        class="btn btn-primary">Subscribe Now</button>
+            </form>
+        </div>
+
+        <!-- BUSINESS LISTING -->
+        <div class="service-card">
+            <div style="font-size:48px;">🏢</div>
+            <h3>Featured Business</h3>
+            <div class="price">₹499 <span>/ month</span></div>
+            <p style="color:#666; margin-bottom:20px;">
+                Get your business featured at the top of
+                the directory with a premium badge.
+            </p>
+            <form th:action="@{/paid/subscribe}" method="post">
+                <input type="hidden" name="serviceType"
+                       value="BUSINESS_LISTING"/>
+                <button type="submit"
+                        class="btn btn-primary">Subscribe Now</button>
+            </form>
+        </div>
+
+        <!-- CITY GUIDE -->
+        <div class="service-card">
+            <div style="font-size:48px;">🗺️</div>
+            <h3>City Tourist Guide</h3>
+            <div class="price">₹199 <span>/ month</span></div>
+            <p style="color:#666; margin-bottom:20px;">
+                Curated tourist itineraries, hidden gems,
+                local tips & transport guidance.
+            </p>
+            <form th:action="@{/paid/subscribe}" method="post">
+                <input type="hidden" name="serviceType"
+                       value="CITY_GUIDE"/>
+                <button type="submit"
+                        class="btn btn-primary">Subscribe Now</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<footer th:replace="~{layout/base :: footer}"></footer>
+</body>
+</html>

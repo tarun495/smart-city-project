@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="${title} + ' | SmartCity'">SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<!-- ── NAVBAR FRAGMENT ── -->
+<nav class="navbar" th:fragment="navbar">
+    <a class="brand" th:href="@{/home}">🏙️ SmartCity</a>
+    <ul>
+        <li><a th:href="@{/home}">Home</a></li>
+        <li><a th:href="@{/map}">City Map</a></li>
+        <li><a th:href="@{/history}">History</a></li>
+        <li><a th:href="@{/news}">News</a></li>
+        <li><a th:href="@{/business}">Business</a></li>
+        <li><a th:href="@{/forum}">Forum</a></li>
+        <li><a th:href="@{/search}">Search</a></li>
+
+        <!-- Paid Services Dropdown -->
+        <li><a th:href="@{/paid/subscribe?service=NEWS_PREMIUM}">
+            Premium <span class="badge">PRO</span></a>
+        </li>
+
+        <!-- Show if NOT logged in -->
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/auth/login}">Login</a>
+        </li>
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/auth/register}">Register</a>
+        </li>
+
+        <!-- Show if logged in -->
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/auth/logout}">Logout</a>
+        </li>
+
+        <!-- Show only for ADMIN -->
+        <li sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin}" style="color:#e94560;">Admin</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- ── FOOTER FRAGMENT ── -->
+<footer th:fragment="footer">
+    <p>© 2025 SmartCity Portal | 
+       <a th:href="@{/news}">News</a> | 
+       <a th:href="@{/map}">Map</a> | 
+       <a th:href="@{/forum}">Forum</a>
+    </p>
+</footer>
+
+</body>
+</html>

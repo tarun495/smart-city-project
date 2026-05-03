@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head('City History')}"></head>
+<body>
+<nav th:replace="~{layout/base :: navbar}"></nav>
+
+<div class="hero" style="padding:50px 20px;">
+    <h1>🏛️ City History</h1>
+    <p>Discover the rich heritage of our city</p>
+</div>
+
+<div class="section">
+    <div style="max-width:900px; margin:0 auto;">
+
+        <div class="card" style="margin-bottom:25px;">
+            <h3>🏺 Ancient History</h3>
+            <p style="margin-top:10px; line-height:1.8;">
+                The city dates back to ancient times, with evidence of
+                early settlements along the river banks. Archaeological
+                findings suggest habitation as early as the 3rd century BC.
+                The region flourished as a trade hub connecting the northern
+                and southern parts of the subcontinent.
+            </p>
+        </div>
+
+        <div class="card" style="margin-bottom:25px;">
+            <h3>⚔️ Medieval Period</h3>
+            <p style="margin-top:10px; line-height:1.8;">
+                During the medieval era, the city came under the rule of
+                several dynasties. Each ruler left a distinct architectural
+                and cultural imprint — from grand forts to intricate temples
+                and mosques that still stand today as heritage monuments.
+            </p>
+        </div>
+
+        <div class="card" style="margin-bottom:25px;">
+            <h3>🇮🇳 Colonial Era & Independence</h3>
+            <p style="margin-top:10px; line-height:1.8;">
+                The British colonial period transformed the city into an
+                administrative and commercial centre. The city played a
+                crucial role in the independence movement, with several
+                notable freedom fighters hailing from this region.
+                Post-independence, rapid industrialisation brought
+                significant demographic and economic changes.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌆 Modern City</h3>
+            <p style="margin-top:10px; line-height:1.8;">
+                Today, the city is a thriving metropolis with a diverse
+                economy spanning IT, manufacturing, trade and tourism.
+                The city government continues to invest in smart
+                infrastructure, public transport and green spaces to
+                improve the quality of life for its residents.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<footer th:replace="~{layout/base :: footer}"></footer>
+</body>
+</html>

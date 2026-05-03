@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Detail | SmartCity</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:Arial, sans-serif;
+               background:#f4f6f9; color:#333; }
+        .navbar { background:#1a1a2e; padding:15px 30px;
+                  display:flex; justify-content:space-between;
+                  align-items:center; }
+        .navbar .brand { color:#e94560; font-size:22px;
+                         font-weight:700;
+                         text-decoration:none; }
+        .navbar ul { list-style:none; display:flex;
+                     gap:20px; }
+        .navbar ul li a { color:#ccc; text-decoration:none;
+                          font-size:14px; }
+        .navbar ul li a:hover { color:#e94560; }
+        .section { padding:40px 30px; }
+        .article-card { background:white;
+                        border-radius:12px;
+                        padding:40px;
+                        max-width:800px;
+                        margin:0 auto;
+                        box-shadow:0 4px 15px
+                        rgba(0,0,0,0.08); }
+        .article-badge { display:inline-block;
+                         background:#e94560; color:white;
+                         padding:4px 14px;
+                         border-radius:20px;
+                         font-size:12px;
+                         font-weight:600;
+                         margin-bottom:15px; }
+        .premium-badge { display:inline-block;
+                         background:#ffd700; color:#1a1a2e;
+                         padding:4px 14px;
+                         border-radius:20px;
+                         font-size:12px;
+                         font-weight:600;
+                         margin-left:8px; }
+        .article-title { font-size:28px; font-weight:700;
+                         color:#1a1a2e; margin-bottom:15px;
+                         line-height:1.4; }
+        .article-meta { display:flex; gap:20px;
+                        color:#999; font-size:13px;
+                        margin-bottom:25px;
+                        padding-bottom:20px;
+                        border-bottom:2px solid #f0f0f0; }
+        .article-content { font-size:16px; line-height:1.9;
+                           color:#444; }
+        .btn-back { display:inline-block;
+                    background:#1a1a2e; color:white;
+                    padding:10px 24px; border-radius:8px;
+                    text-decoration:none; font-size:14px;
+                    font-weight:600; margin-top:30px; }
+        .btn-back:hover { background:#e94560; }
+        .related-section { max-width:800px; margin:30px auto; }
+        .related-section h3 { font-size:20px;
+                              font-weight:700;
+                              color:#1a1a2e;
+                              margin-bottom:15px; }
+        .related-grid { display:grid;
+                        grid-template-columns:
+                        repeat(auto-fit,minmax(230px,1fr));
+                        gap:15px; }
+        .related-card { background:white;
+                        border-radius:10px; padding:18px;
+                        box-shadow:0 2px 10px
+                        rgba(0,0,0,0.06);
+                        border-left:3px solid #e94560;
+                        text-decoration:none; color:#333;
+                        display:block; }
+        .related-card:hover { transform:translateY(-2px); }
+        .related-card small { color:#e94560;
+                              font-weight:600;
+                              font-size:11px; }
+        .related-card h4 { font-size:14px; margin-top:6px;
+                           color:#1a1a2e; line-height:1.4; }
+        footer { background:#1a1a2e; color:#aaa;
+                 text-align:center; padding:20px;
+                 margin-top:60px; font-size:13px; }
+        footer a { color:#e94560; text-decoration:none; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="section">
+    <div class="article-card"
+         xmlns:th="http://www.thymeleaf.org">
+
+        <!-- Category & Premium Badge -->
+        <div>
+            <span class="article-badge"
+                  th:text="${article.category}">
+                Category
+            </span>
+            <span class="premium-badge"
+                  th:if="${article.premium}">
+                ⭐ PREMIUM
+            </span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="article-title"
+            th:text="${article.title}">
+            Article Title
+        </h1>
+
+        <!-- Meta Info -->
+        <div class="article-meta">
+            <span>
+                ✍️ By
+                <strong th:text="${article.author}">
+                    Author
+                </strong>
+            </span>
+            <span>
+                📅
+                <span th:text="${article.publishedAt}">
+                    Date
+                </span>
+            </span>
+        </div>
+
+        <!-- Content -->
+        <div class="article-content"
+             th:text="${article.content}">
+            Article content goes here...
+        </div>
+
+        <!-- Back Button -->
+        <a href="/news" class="btn-back">
+            ← Back to News
+        </a>
+    </div>
+
+    <!-- Related News -->
+    <div class="related-section"
+         xmlns:th="http://www.thymeleaf.org">
+        <h3>📰 More News</h3>
+        <div class="related-grid">
+            <a th:each="related : ${relatedNews}"
+               th:href="@{/news/{id}(id=${related.id})}"
+               class="related-card">
+                <small th:text="${related.category}">
+                    Category
+                </small>
+                <h4 th:text="${#strings.abbreviate(
+                    related.title, 60)}">
+                    Title
+                </h4>
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal |
+        <a href="/news">News</a> |
+        <a href="/map">Map</a> |
+        <a href="/forum">Forum</a>
+    </p>
+</footer>
+</body>
+</html>

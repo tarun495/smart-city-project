@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Market Rates | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="hero" style="padding:30px 20px;">
+    <h1>📊 Live <span style="color:#ffd700;">Market Rates</span></h1>
+    <p>Today's commodity prices — updated every morning</p>
+</div>
+
+<div class="section">
+    <div style="background:#ffd700; color:#1a1a2e;
+                padding:8px 20px; border-radius:25px;
+                display:inline-block; font-weight:600;
+                font-size:13px; margin-bottom:25px;">
+        ⭐ PREMIUM SUBSCRIBER
+    </div>
+
+    <!-- Rates Table -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="entry : ${rates}">
+                    <td th:text="${entry.key}"
+                        style="font-weight:600;">
+                        Item
+                    </td>
+                    <td th:text="${entry.value}"
+                        style="color:#e94560;
+                               font-weight:600;">
+                        Price
+                    </td>
+                    <td style="color:#28a745;">
+                        ▲ Fresh today
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top:20px; padding:15px;
+                background:#fff3cd; border-radius:8px;
+                font-size:13px; color:#856404;">
+        ℹ️ Rates are indicative and sourced from
+        local market data. Updated by 8:00 AM daily.
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal</p>
+</footer>
+</body>
+</html>

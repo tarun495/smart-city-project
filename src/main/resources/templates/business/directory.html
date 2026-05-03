@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Business Directory | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Register</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="section">
+    <h2 class="section-title">🏢 Business <span>Directory</span></h2>
+    <div class="grid-3">
+        <div class="card" th:each="biz : ${businesses}">
+            <div style="display:flex; justify-content:space-between;">
+                <span style="background:#1a1a2e; color:white;
+                             padding:3px 10px; border-radius:10px;
+                             font-size:11px;"
+                      th:text="${biz.category}">Category</span>
+                <span th:if="${biz.featured}"
+                      style="color:#e94560; font-size:12px;
+                             font-weight:600;">⭐ Featured</span>
+            </div>
+            <h3 style="margin:12px 0 8px;"
+                th:text="${biz.name}">Business Name</h3>
+            <p th:text="${biz.description}">Description</p>
+            <hr style="margin:12px 0; border:none;
+                       border-top:1px solid #f0f0f0;"/>
+            <p style="font-size:13px; color:#666;">
+                📍 <span th:text="${biz.address}">Address</span>
+            </p>
+            <p style="font-size:13px; color:#666;">
+                📞 <span th:text="${biz.phone}">Phone</span>
+            </p>
+        </div>
+        <div th:if="${#lists.isEmpty(businesses)}"
+             style="grid-column:1/-1; text-align:center;">
+            <p>No businesses listed yet.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal |
+        <a href="/news">News</a> |
+        <a href="/map">Map</a> |
+        <a href="/forum">Forum</a>
+    </p>
+</footer>
+</body>
+</html>

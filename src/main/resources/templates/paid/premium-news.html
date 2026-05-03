@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Premium News | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/map">City Map</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/business">Business</a></li>
+        <li><a href="/forum">Forum</a></li>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="hero" style="padding:30px 20px;">
+    <h1>📰 Premium <span style="color:#ffd700;">City News</span></h1>
+    <p>Exclusive in-depth reports and early access stories</p>
+</div>
+
+<div class="section">
+    <div style="background:#ffd700; color:#1a1a2e;
+                padding:8px 20px; border-radius:25px;
+                display:inline-block; font-weight:600;
+                font-size:13px; margin-bottom:25px;">
+        ⭐ PREMIUM SUBSCRIBER
+    </div>
+
+    <div class="grid-3">
+        <div class="card" th:each="article : ${articles}">
+            <div style="display:flex;
+                        justify-content:space-between;
+                        align-items:center;
+                        margin-bottom:10px;">
+                <small style="color:#e94560;
+                               font-weight:600;"
+                       th:text="${article.category}">
+                    Category
+                </small>
+                <span style="background:#ffd700;
+                              color:#1a1a2e;
+                              font-size:10px;
+                              padding:2px 8px;
+                              border-radius:10px;
+                              font-weight:600;">
+                    EXCLUSIVE
+                </span>
+            </div>
+            <h3 style="margin-bottom:10px;"
+                th:text="${article.title}">Title</h3>
+            <p th:text="${article.content}">Content</p>
+            <hr style="margin:12px 0; border:none;
+                       border-top:1px solid #f0f0f0;"/>
+            <small style="color:#999;"
+                   th:text="${article.author}">Author</small>
+        </div>
+
+        <div th:if="${#lists.isEmpty(articles)}"
+             class="card"
+             style="grid-column:1/-1; text-align:center;
+                    padding:40px;">
+            <div style="font-size:48px;">📰</div>
+            <h3 style="margin:15px 0;">
+                No premium articles yet
+            </h3>
+            <p style="color:#666;">
+                Check back soon — exclusive content
+                is published daily.
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal |
+        <a href="/news">Free News</a> |
+        <a href="/paid/subscribe?service=NEWS_PREMIUM">
+            Manage Subscription
+        </a>
+    </p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Access Denied | SmartCity</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="brand" href="/home">🏙️ SmartCity</a>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/auth/login">Login</a></li>
+    </ul>
+</nav>
+
+<div style="text-align:center; padding:80px 20px;">
+    <div style="font-size:80px;">🚫</div>
+    <h1 style="font-size:64px; color:#e94560; margin:20px 0;">
+        403
+    </h1>
+    <h2 style="color:#1a1a2e; margin-bottom:15px;">
+        Access Denied
+    </h2>
+    <p style="color:#666; font-size:16px; margin-bottom:30px;">
+        You don't have permission to view this page.<br/>
+        Please login with an Admin account.
+    </p>
+    <div style="display:flex; gap:15px; justify-content:center;">
+        <a href="/home" class="btn btn-primary">Go Home</a>
+        <a href="/auth/login"
+           style="padding:12px 28px; border-radius:25px;
+                  border:2px solid #1a1a2e; color:#1a1a2e;
+                  text-decoration:none; font-weight:600;">
+            Login
+        </a>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 SmartCity Portal</p>
+</footer>
+</body>
+</html>
